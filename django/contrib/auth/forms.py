@@ -98,8 +98,8 @@ class UserCreationForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         username = self.cleaned_data["username"]
         try:
-            User._default_manager.get(username=username)
-        except User.DoesNotExist:
+            self._meta.model._default_manager.get(username=username)
+        except self._meta.model.DoesNotExist:
             return username
         raise forms.ValidationError(
             self.error_messages['duplicate_username'],

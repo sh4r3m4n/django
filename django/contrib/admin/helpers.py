@@ -33,7 +33,8 @@ class AdminForm(object):
         self.prepopulated_fields = [{
             'field': form[field_name],
             'dependencies': [form[f] for f in dependencies]
-        } for field_name, dependencies in prepopulated_fields.items()]
+        } for field_name, dependencies in prepopulated_fields.items()
+        if field_name not in readonly_fields]
         self.model_admin = model_admin
         if readonly_fields is None:
             readonly_fields = ()
